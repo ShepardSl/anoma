@@ -238,6 +238,22 @@ p+p {
   object-position: center;
 }
 
+
+.hero__image-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hero__image-fallback.is-visible {
+  opacity: 1;
+}
+
 .hero__socials {
   position: absolute;
   top: 0;
@@ -332,10 +348,13 @@ p+p {
 
 @media (max-width: 768px) {
   .hero__image {
+    display: none;
+  }
+
+  .hero__image-fallback {
+    opacity: 1;
     height: 70%;
-
     object-position: center;
-
   }
 
   .hero::after {
@@ -1163,6 +1182,26 @@ p+p {
   }
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .cursor-distortion,
+  .world__team-track {
+    display: none !important;
+  }
+}
+
 .sidor-easter-egg {
   position: fixed;
   bottom: 24px;
@@ -1352,6 +1391,7 @@ p+p {
     --container-padding: var(--space-md);
   }
 }
+
 
 
 .sidor-easter-egg {

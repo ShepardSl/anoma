@@ -3,22 +3,33 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-  initSmoothScroll();
-  initCursorDistortion();
+  const reduceMotion = shouldReduceMotion();
+
+  initSmoothScroll(reduceMotion);
   initVideoModal();
   initPreregModal();
-  initTileHoverDistortion();
-  initHeroGlitchText();
-  initScrollReveal();
-  initSidorEasterEgg();
+  initHeroMedia(reduceMotion);
 
+  if (!reduceMotion) {
+    initCursorDistortion();
+    initTileHoverDistortion();
+    initHeroGlitchText();
+    initScrollReveal();
+    initSidorEasterEgg();
+  }
 });
+
+function shouldReduceMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(max-width: 768px)').matches;
+}
 
 function initVideoModal() {
   const modal = document.getElementById('videoModal');
   const iframe = document.getElementById('videoIframe');
+  if (!modal || !iframe) return;
+
   const content = modal.querySelector('.video-modal__content');
-  if (!modal || !iframe || !content) return;
+  if (!content) return;
 
   const overlay = modal.querySelector('.video-modal__overlay');
   const closeBtn = modal.querySelector('.video-modal__close');
@@ -64,8 +75,10 @@ function initVideoModal() {
 function initPreregModal() {
   const modal = document.getElementById('preregModal');
   const openBtn = document.getElementById('btnOpenPrereg');
+  if (!modal || !openBtn) return;
+
   const content = modal.querySelector('.prereg-modal__content');
-  if (!modal || !openBtn || !content) return;
+  if (!content) return;
 
   const overlay = modal.querySelector('.prereg-modal__overlay');
   const closeBtn = modal.querySelector('.prereg-modal__close');
@@ -105,7 +118,7 @@ function initHeroGlitchText() {
 
   const originalText = textEl.textContent.trim();
 
-  const chars = '!<>-_\\\\/[]{}вЂ”=+*^?#________';
+  const chars = '!<>-_\\\\/[]{}—=+*^?#________';
 
   let scrambleInterval;
   let decipherInterval;
@@ -195,7 +208,7 @@ function initCursorDistortion() {
   animate();
 }
 
-function initSmoothScroll() {
+function initSmoothScroll(reduceMotion = false) {
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
@@ -210,7 +223,7 @@ function initSmoothScroll() {
 
       window.scrollTo({
         top: targetPosition,
-        behavior: 'smooth',
+        behavior: reduceMotion ? 'auto' : 'smooth',
       });
 
       target.setAttribute('tabindex', '-1');
@@ -346,6 +359,26 @@ function initScrollReveal() {
   tiles.forEach(tile => {
     observer.observe(tile);
   });
+}
+
+
+function initHeroMedia(reduceMotion = false) {
+  const heroVideo = document.querySelector('.hero__image');
+  const heroFallback = document.querySelector('.hero__image-fallback');
+  const worldVideo = document.querySelector('.world__bg-video');
+
+  if (reduceMotion) {
+    [heroVideo, worldVideo].forEach((video) => {
+      if (!video) return;
+      video.pause();
+      video.removeAttribute('autoplay');
+      video.currentTime = 0;
+    });
+
+    if (heroFallback) {
+      heroFallback.classList.add('is-visible');
+    }
+  }
 }
 
 function initSidorEasterEgg() {
