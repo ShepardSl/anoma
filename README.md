@@ -1,8 +1,9 @@
-# PROJECT_NAME — Landing Page
+# ANOMA — Landing Page
 
-Промо-страница для MMORPG в постапокалиптическом сеттинге.
+Промо-страница MMORPG в сеттинге STALKER.  
+**Прод:** [https://anoma.su](https://anoma.su)
 
-## 🚀 Запуск
+## 🚀 Запуск (локально)
 
 Проект — статический сайт, бэкенд не нужен. Любой из способов:
 
@@ -30,25 +31,28 @@ python -m http.server 3000
     ├── css/
     │   └── styles.css      Основные стили
     ├── js/
-    │   └── main.js         Скрипты
-    ├── img/                Изображения (placeholder → реальные ассеты)
-    └── fonts/              Кастомные шрифты
+    │   └── main.js         Скрипты (модалки, анимации, пасхалка)
+    └── img/                Изображения, видео, иконки
 ```
 
-## 📝 Правила именования
+## 🎮 Фичи
 
-| Сущность | Формат | Пример |
-|----------|--------|--------|
-| CSS-файлы | `kebab-case.css` | `styles.css`, `hero-section.css` |
-| JS-файлы | `camelCase.js` | `main.js`, `scrollReveal.js` |
-| Изображения | `kebab-case.webp` | `hero-bg.webp`, `feature-icon-01.webp` |
-| CSS-классы | BEM (`block__element--modifier`) | `.header__nav-link--active` |
-| CSS-переменные | `--category-name` | `--clr-accent`, `--fs-lg` |
-| HTML id/якоря | `kebab-case` | `#about`, `#game-features` |
+- Hero-секция с фоновым видео и CTA-кнопкой предрегистрации
+- Секция «О проекте» с встроенным YouTube-трейлером
+- Секция «Особенности» — тайлы с SVG-масками и глитч-эффектом при наведении
+- Секция «Мир» — фоновое видео, описание, бегущая лента бейджиков команды
+- Модальные окна: видео-плеер и попап предрегистрации
+- Глитч-анимация текста кнопки при наведении
+- Scroll-reveal анимация плиток (glitch distortion)
+- Эффект дисторсии за курсором
+- Пасхалка Сидоровича (1 раз за сессию)
+- `prefers-reduced-motion` поддержка
+- SEO: OG/Twitter мета-теги, canonical, Schema.org JSON-LD
 
 ## 🛠 Технологии
 
 - HTML5, CSS3, Vanilla JS
+- Google Fonts (Roboto Condensed)
+- SVG-фильтры для анимаций
 - Без фреймворков и сборщиков
-- Mobile-first, семантическая разметка
-- SEO: meta, OG, canonical, sitemap, robots
+- Семантическая, адаптивная разметка

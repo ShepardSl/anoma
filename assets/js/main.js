@@ -2,23 +2,33 @@
 
 'use strict';
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
-  initCursorDistortion();
   initVideoModal();
   initPreregModal();
-  initTileHoverDistortion();
-  initHeroGlitchText();
-  initScrollReveal();
   initSidorEasterEgg();
 
+  if (!prefersReducedMotion) {
+    initCursorDistortion();
+    initTileHoverDistortion();
+    initHeroGlitchText();
+    initScrollReveal();
+  } else {
+    // Сразу показываем тайлы без анимации
+    document.querySelectorAll('.features__tile').forEach(tile => {
+      tile.classList.add('is-revealed');
+    });
+  }
 });
 
 function initVideoModal() {
   const modal = document.getElementById('videoModal');
   const iframe = document.getElementById('videoIframe');
+  if (!modal || !iframe) return;
   const content = modal.querySelector('.video-modal__content');
-  if (!modal || !iframe || !content) return;
+  if (!content) return;
 
   const overlay = modal.querySelector('.video-modal__overlay');
   const closeBtn = modal.querySelector('.video-modal__close');
@@ -63,9 +73,10 @@ function initVideoModal() {
 
 function initPreregModal() {
   const modal = document.getElementById('preregModal');
+  if (!modal) return;
   const openBtn = document.getElementById('btnOpenPrereg');
   const content = modal.querySelector('.prereg-modal__content');
-  if (!modal || !openBtn || !content) return;
+  if (!openBtn || !content) return;
 
   const overlay = modal.querySelector('.prereg-modal__overlay');
   const closeBtn = modal.querySelector('.prereg-modal__close');

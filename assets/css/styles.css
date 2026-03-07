@@ -14,7 +14,7 @@
   --clr-accent-hover: #d4c24f;
   --clr-danger: #c44b3f;
 
-  --ff-base: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ff-base: 'Roboto Condensed', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --ff-heading: var(--ff-base);
 
   --fs-xs: clamp(0.700rem, 0.65rem + 0.25vw, 0.750rem);
@@ -127,22 +127,7 @@ button {
   outline: none;
 }
 
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--clr-accent);
-  color: var(--clr-bg);
-  font-weight: var(--fw-semibold);
-  border-radius: var(--radius-sm);
-  z-index: var(--z-modal);
-  transition: top var(--transition-fast);
-}
 
-.skip-link:focus {
-  top: var(--space-md);
-}
 
 .cursor-distortion {
   position: fixed;
@@ -1389,5 +1374,25 @@ p+p {
   .sidor-easter-egg img {
     width: 48px;
     height: 48px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Accessibility: Reduced Motion
+   ═══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cursor-distortion {
+    display: none !important;
   }
 }
