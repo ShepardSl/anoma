@@ -1,4 +1,4 @@
-﻿
+
 
 'use strict';
 
@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initVideoModal();
   initPreregModal();
+  initEditionsModal();
   initSidorEasterEgg();
+  initHeader();
 
   if (!prefersReducedMotion) {
     initCursorDistortion();
@@ -74,20 +76,24 @@ function initVideoModal() {
 function initPreregModal() {
   const modal = document.getElementById('preregModal');
   if (!modal) return;
-  const openBtn = document.getElementById('btnOpenPrereg');
+  const openBtns = document.querySelectorAll('#btnOpenPrereg, #btnOpenPreregMobile');
   const content = modal.querySelector('.prereg-modal__content');
-  if (!openBtn || !content) return;
+  if (!openBtns.length || !content) return;
 
   const overlay = modal.querySelector('.prereg-modal__overlay');
   const closeBtn = modal.querySelector('.prereg-modal__close');
+  let lastFocusedBtn = null;
 
-  openBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  openBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      lastFocusedBtn = btn;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
 
-    content.focus();
+      content.focus();
+    });
   });
 
   function closeModal() {
@@ -95,7 +101,120 @@ function initPreregModal() {
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
 
-    openBtn.focus();
+    if (lastFocusedBtn) {
+      lastFocusedBtn.focus();
+    }
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+}
+
+function initEditionsModal() {
+  const modal = document.getElementById('editionsModal');
+  if (!modal) return;
+  const cards = document.querySelectorAll('.editions__card');
+  const content = modal.querySelector('.editions-modal__content');
+  if (!cards.length || !content) return;
+
+  const overlay = modal.querySelector('.editions-modal__overlay');
+  const closeBtn = modal.querySelector('.editions-modal__close');
+  const tabs = modal.querySelectorAll('.editions-modal__tab');
+  const priceEl = document.getElementById('editionsPrice');
+  const galleryItems = modal.querySelectorAll('.editions-gallery__item');
+  const featureItems = modal.querySelectorAll('.editions-modal__feature');
+  let lastFocusedCard = null;
+
+  const tierHierarchy = {
+    'standard': 1,
+    'deluxe': 2,
+    'ultimate': 3
+  };
+
+  const prices = {
+    'standard': '19 900,00 KZT',
+    'deluxe': '26 500,00 KZT',
+    'ultimate': '35 900,00 KZT'
+  };
+
+  function updateModalState(targetTier) {
+    // Update active tab styling
+    tabs.forEach(tab => {
+      if (tab.dataset.target === targetTier) {
+        tab.classList.add('editions-modal__tab--active');
+        tab.setAttribute('aria-selected', 'true');
+      } else {
+        tab.classList.remove('editions-modal__tab--active');
+        tab.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    // Update Price
+    if (priceEl && prices[targetTier]) {
+      priceEl.textContent = prices[targetTier];
+    }
+
+    // Update disabled state for items and features
+    const activeLevel = tierHierarchy[targetTier];
+    
+    galleryItems.forEach(item => {
+      const itemTier = item.dataset.tier;
+      if (tierHierarchy[itemTier] > activeLevel) {
+        item.classList.add('is-disabled');
+      } else {
+        item.classList.remove('is-disabled');
+      }
+    });
+
+    featureItems.forEach(item => {
+      const itemTier = item.dataset.tier;
+      if (tierHierarchy[itemTier] > activeLevel) {
+        item.classList.add('is-disabled');
+      } else {
+        item.classList.remove('is-disabled');
+      }
+    });
+  }
+
+  // Open modal when clicking a card
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      lastFocusedCard = card;
+      
+      let targetTier = 'standard';
+      if (card.classList.contains('editions__card--deluxe')) targetTier = 'deluxe';
+      if (card.classList.contains('editions__card--ultimate')) targetTier = 'ultimate';
+
+      updateModalState(targetTier);
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      content.focus();
+    });
+  });
+
+  // Tab switching logic
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      updateModalState(tab.dataset.target);
+    });
+  });
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    if (lastFocusedCard) {
+      lastFocusedCard.focus();
+    }
   }
 
   closeBtn.addEventListener('click', closeModal);
@@ -231,14 +350,14 @@ function initSmoothScroll() {
 }
 
 function initTileHoverDistortion() {
-  const tiles = document.querySelectorAll('.features__tile');
+  const tiles = document.querySelectorAll('.features__tile, .editions__card');
   const svgDefs = document.querySelector('svg.sr-only defs');
   if (!tiles.length || !svgDefs) return;
 
   const maxScale = 35;
 
   tiles.forEach((tile, index) => {
-    const img = tile.querySelector('.features__tile-img');
+    const img = tile.querySelector('.features__tile-img, .editions__card-cover');
     const filterId = `distort-tile-hover-${index}`;
     const mapId = `displacement-hover-${index}`;
 
@@ -400,3 +519,53 @@ function initSidorEasterEgg() {
   observer.observe(footer);
 }
 
+function initHeader() {
+  const header = document.getElementById('header');
+  const btnBurger = document.getElementById('btnBurger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (!header || !btnBurger || !mobileMenu) return;
+
+  // Show header on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('header--visible');
+    } else {
+      header.classList.remove('header--visible');
+    }
+  }, { passive: true });
+
+  // Check initial state
+  if (window.scrollY > 50) {
+    header.classList.add('header--visible');
+  }
+
+  // Toggle mobile menu
+  btnBurger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('is-open');
+    if (isOpen) {
+      mobileMenu.classList.remove('is-open');
+      header.classList.remove('is-menu-open');
+      btnBurger.classList.remove('is-active');
+      btnBurger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    } else {
+      mobileMenu.classList.add('is-open');
+      header.classList.add('is-menu-open');
+      btnBurger.classList.add('is-active');
+      btnBurger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  // Close mobile menu when a link is clicked
+  const mobileLinks = mobileMenu.querySelectorAll('.mobile-menu__link, .mobile-menu__cta, .hero__cta');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('is-open');
+      header.classList.remove('is-menu-open');
+      btnBurger.classList.remove('is-active');
+      btnBurger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+}
