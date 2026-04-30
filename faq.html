@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FAQ — ANOMA</title>
+  <meta name="description" content="Часто задаваемые вопросы по игре ANOMA. Узнайте больше о разработке, доступе и игровых механиках.">
+
+  <link rel="icon" href="./assets/img/favicon.ico" sizes="any">
+  <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body class="page-faq">
+
+  <header class="header header--visible" id="header">
+    <div class="container header__inner">
+      <div class="header__left">
+        <button class="header__burger" id="btnBurger" aria-label="Открыть меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="index.html" class="header__logo-link" aria-label="На главную">
+          <img src="./assets/img/logo.png" alt="ANOMA Logo" class="header__logo">
+        </a>
+        <nav class="header__nav" aria-label="Основная навигация">
+          <a href="faq.html" class="header__nav-link is-active">FAQ</a>
+          <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="header__nav-link">Поддержка</a>
+        </nav>
+      </div>
+
+      <div class="header__socials">
+        <a href="https://discord.com/invite/6MUMWm6wPn" class="header__social-link" aria-label="Discord" target="_blank"
+          rel="noopener">
+          <img src="./assets/img/discord.svg" alt="Discord" width="24" height="24">
+        </a>
+        <a href="https://t.me/anoma_ufo" class="header__social-link" aria-label="Telegram" target="_blank"
+          rel="noopener">
+          <img src="./assets/img/telegram.svg" alt="Telegram" width="24" height="24">
+        </a>
+        <a href="https://vk.com/anoma_ufo" class="header__social-link" aria-label="VK" target="_blank" rel="noopener">
+          <img src="./assets/img/vk.svg" alt="VK" width="24" height="24">
+        </a>
+        <a href="https://www.youtube.com/@anoma_ufo" class="header__social-link" aria-label="YouTube" target="_blank"
+          rel="noopener">
+          <img src="./assets/img/youtube.svg" alt="YouTube" width="24" height="24">
+        </a>
+      </div>
+
+      <div class="header__right">
+        <a href="index.html#editions" class="header__cta">ВЫБРАТЬ ИЗДАНИЕ</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__content">
+      <nav class="mobile-menu__nav">
+        <a href="index.html" class="mobile-menu__link">Главная</a>
+        <a href="faq.html" class="mobile-menu__link is-active">FAQ</a>
+        <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="mobile-menu__link">Поддержка</a>
+      </nav>
+      <button id="btnOpenPreregMobile" class="hero__cta" aria-label="Открыть окно регистрации">
+        <img class="hero__cta-default" src="./assets/img/btn-default.svg" alt="">
+        <img class="hero__cta-hover" src="./assets/img/btn-hover.svg" alt="">
+        <span class="hero__cta-text">РЕГИСТРАЦИЯ</span>
+      </button>
+      <a href="index.html#editions" class="mobile-menu__cta">ВЫБРАТЬ ИЗДАНИЕ</a>
+    </div>
+  </div>
+
+  <main class="main">
+    <section class="section section--faq">
+      <div class="container">
+        <div class="faq__header">
+          <h1 class="faq__title">ЧАСТО ЗАДАВАЕМЫЕ <br> ВОПРОСЫ</h1>
+        </div>
+
+        <div class="faq__content">
+          <!-- Category: General -->
+          <div class="faq__category">
+            <h2 class="faq__category-title">ОБЩИЕ</h2>
+            <div class="faq__list">
+              <div class="faq__item">
+                <button class="faq__trigger" aria-expanded="false">
+                  Что такое ANOMA?
+                  <span class="faq__icon"></span>
+                </button>
+                <div class="faq__answer" aria-hidden="true">
+                  <div class="faq__answer-inner">
+                    ANOMA — это многопользовательская игра (MMORPG) в сеттинге STALKER с элементами выживания, открытым
+                    миром и напряженным «экстракшен»-геймплеем.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__trigger" aria-expanded="false">
+                  На каком движке разрабатывается игра?
+                  <span class="faq__icon"></span>
+                </button>
+                <div class="faq__answer" aria-hidden="true">
+                  <div class="faq__answer-inner">
+                    Игра разрабатывается на современном движке, обеспечивающем высокий уровень графики и стабильную
+                    сетевую составляющую.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category: Early Access -->
+          <div class="faq__category">
+            <h2 class="faq__category-title">ДОСТУП К РАННЕЙ ВЕРСИИ</h2>
+            <div class="faq__list">
+              <div class="faq__item">
+                <button class="faq__trigger" aria-expanded="false">
+                  Как попасть в ранний доступ?
+                  <span class="faq__icon"></span>
+                </button>
+                <div class="faq__answer" aria-hidden="true">
+                  <div class="faq__answer-inner">
+                    Доступ предоставляется владельцам любого издания поддержки. Вы можете выбрать подходящее издание в
+                    соответствующем разделе сайта.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__trigger" aria-expanded="false">
+                  Когда начнется ОБТ?
+                  <span class="faq__icon"></span>
+                </button>
+                <div class="faq__answer" aria-hidden="true">
+                  <div class="faq__answer-inner">
+                    Даты этапов тестирования будут объявлены в наших социальных сетях. Следите за обновлениями в Discord
+                    и Telegram.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category: Technical -->
+          <div class="faq__category">
+            <h2 class="faq__category-title">ТЕХНИЧЕСКИЕ ВОПРОСЫ</h2>
+            <div class="faq__list">
+              <div class="faq__item">
+                <button class="faq__trigger" aria-expanded="false">
+                  Какие системные требования у игры?
+                  <span class="faq__icon"></span>
+                </button>
+                <div class="faq__answer" aria-hidden="true">
+                  <div class="faq__answer-inner">
+                    На данный момент игра находится в активной разработке, и системные требования могут измениться.
+                    Ориентировочно: Windows 10/11, Intel Core i5-8400 / AMD Ryzen 5 2600, 16 GB RAM, NVIDIA GeForce GTX
+                    1060 / AMD Radeon RX 580.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__trigger" aria-expanded="false">
+                  Планируется ли выход на консолях?
+                  <span class="faq__icon"></span>
+                </button>
+                <div class="faq__answer" aria-hidden="true">
+                  <div class="faq__answer-inner">
+                    Первоочередная цель для нас — качественный релиз на PC. Возможность портирования на консоли будет
+                    рассматриваться уже после полноценного выхода игры.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support Banner -->
+        <div class="faq__banner">
+          <div class="faq__banner-content">
+            <h2 class="faq__banner-title">ОСТАЛИСЬ ВОПРОСЫ <br> ПО ЗОНЕ?</h2>
+            <p class="faq__banner-desc">Наша команда поддержки всегда на связи и готова помочь вам с любыми техническими
+              или игровыми вопросами.</p>
+            <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="faq__banner-btn">ПОДДЕРЖКА</a>
+          </div>
+          <div class="faq__banner-image">
+            <img src="./assets/img/screenshot.png" alt="Support Image" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="container footer__inner">
+      <div class="footer__top">
+        <div class="footer__contacts">
+          <span class="footer__label">Связаться с нами</span>
+          <a href="mailto:ufogamedevs@gmail.com" class="footer__email">ufogamedevs@gmail.com</a>
+          <div class="footer__payments">
+            <img src="./assets/img/visa.png" alt="Visa" loading="lazy">
+            <img src="./assets/img/mir.png" alt="Mir" loading="lazy">
+            <img src="./assets/img/mastercard.png" alt="Mastercard" loading="lazy">
+          </div>
+        </div>
+        <div class="footer__socials">
+          <span class="footer__socials-text">Следи за разработкой:</span>
+          <div class="footer__socials-list">
+            <a href="https://discord.com/invite/6MUMWm6wPn" class="footer__socials-link" aria-label="Discord"
+              target="_blank" rel="noopener">
+              <img src="./assets/img/discord.svg" alt="Discord" width="24" height="24">
+            </a>
+            <a href="https://vk.com/anoma_ufo" class="footer__socials-link" aria-label="VK" target="_blank"
+              rel="noopener">
+              <img src="./assets/img/vk.svg" alt="VK" width="24" height="24">
+            </a>
+            <a href="https://www.youtube.com/@anoma_ufo" class="footer__socials-link" aria-label="YouTube"
+              target="_blank" rel="noopener">
+              <img src="./assets/img/youtube.svg" alt="YouTube" width="24" height="24">
+            </a>
+            <a href="https://t.me/anoma_ufo" class="footer__socials-link" aria-label="Telegram" target="_blank"
+              rel="noopener">
+              <img src="./assets/img/telegram.svg" alt="Telegram" width="24" height="24">
+            </a>
+          </div>
+        </div>
+
+        <div class="faq__legal-wrap">
+          <div class="footer__legal">
+            <a href="#" target="_blank" class="footer__link">Услуги</a>
+            <a href="#" target="_blank" class="footer__link">Пользовательское соглашение</a>
+            <a href="#" target="_blank" class="footer__link">Политика конфиденциальности</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">ANOMA© 2026. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <svg class="sr-only" aria-hidden="true">
+    <defs>
+      <mask id="tile-mask-1" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"
+        style="mask-type: luminance;">
+        <image href="./assets/img/image-1-mask.png" x="0" y="0" width="1" height="1" preserveAspectRatio="none" />
+      </mask>
+      <mask id="tile-mask-2" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"
+        style="mask-type: luminance;">
+        <image href="./assets/img/image-2-mask.png" x="0" y="0" width="1" height="1" preserveAspectRatio="none" />
+      </mask>
+      <mask id="tile-mask-3" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"
+        style="mask-type: luminance;">
+        <image href="./assets/img/image-3-mask.png" x="0" y="0" width="1" height="1" preserveAspectRatio="none" />
+      </mask>
+    </defs>
+  </svg>
+
+  <!-- Modals -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Видео плеер" aria-hidden="true">
+    <div class="video-modal__overlay"></div>
+    <div class="video-modal__content" tabindex="-1">
+      <button class="video-modal__close" aria-label="Закрыть">&times;</button>
+      <div class="video-modal__iframe-wrap">
+        <iframe class="video-modal__iframe" id="videoIframe" allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="prereg-modal" id="preregModal" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-labelledby="preregTitle">
+    <div class="prereg-modal__overlay"></div>
+    <div class="prereg-modal__content" tabindex="-1">
+      <button class="prereg-modal__close" aria-label="Закрыть">&times;</button>
+      <img src="./assets/img/popup.png" alt="" class="prereg-modal__bg" aria-hidden="true" loading="lazy">
+      <div class="prereg-modal__inner">
+        <h2 id="preregTitle" class="prereg-modal__title">МЫ УЖЕ ГРЕЕМ СЕРВЕРА ;)</h2>
+        <p class="prereg-modal__desc">Регистрации пока нет. Мы сообщим о раннем доступе в <br>соцсетях и ты первым
+          залутаешь свой ник!</p>
+        <div class="prereg-modal__socials">
+          <a href="https://discord.com/invite/6MUMWm6wPn" class="prereg-modal__social-link" aria-label="Discord"
+            target="_blank" rel="noopener">
+            <img src="./assets/img/discord.svg" alt="Discord" width="24" height="24">
+          </a>
+          <a href="https://vk.com/anoma_ufo" class="prereg-modal__social-link" aria-label="VK" target="_blank"
+            rel="noopener">
+            <img src="./assets/img/vk.svg" alt="VK" width="24" height="24">
+          </a>
+          <a href="https://www.youtube.com/@anoma_ufo" class="prereg-modal__social-link" aria-label="YouTube"
+            target="_blank" rel="noopener">
+            <img src="./assets/img/youtube.svg" alt="YouTube" width="24" height="24">
+          </a>
+          <a href="https://t.me/anoma_ufo" class="prereg-modal__social-link" aria-label="Telegram" target="_blank"
+            rel="noopener">
+            <img src="./assets/img/telegram.svg" alt="Telegram" width="24" height="24">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="editions-modal" id="editionsModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="editions-modal__overlay"></div>
+    <div class="editions-modal__content" tabindex="-1">
+      <button class="editions-modal__close" aria-label="Закрыть">&times;</button>
+
+      <div class="editions-modal__tabs">
+        <button class="editions-modal__tab" data-tier="standard">Периметр</button>
+        <button class="editions-modal__tab" data-tier="deluxe">Изотоп</button>
+        <button class="editions-modal__tab editions-modal__tab--active" data-tier="ultimate">Саркофаг</button>
+      </div>
+
+      <div class="editions-modal__body">
+        <div class="editions-modal__gallery">
+          <div class="editions-gallery__main">
+            <img src="./assets/img/edition3.png" alt="Edition Image" id="mainEditionImg">
+          </div>
+          <div class="editions-gallery__item editions-gallery__item--active" data-tier="ultimate"><img
+              src="./assets/img/edition3.png" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/edition2.png" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/edition1.png" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/favicon.svg" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/favicon.svg" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/favicon.svg" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/favicon.svg" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/favicon.svg" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/favicon.svg" alt="">
+            <div class="editions-gallery__bar"></div>
+          </div>
+        </div>
+
+        <div class="editions-modal__info">
+          <p class="editions-modal__desc" id="editionsDesc">
+            Цифровое издание Ultimate предоставляет доступ к полной игре, включает цифровые бонусы из других изданий и
+            эксклюзивные бонусы Ultimate.
+          </p>
+
+          <div class="editions-modal__purchase">
+            <span class="editions-modal__price" id="editionsPrice">35 900,00 KZT</span>
+            <button class="editions-modal__buy-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="editions-modal__buy-icon" aria-hidden="true">
+                <path
+                  d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.24 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z"
+                  fill="currentColor" />
+              </svg>
+              КУПИТЬ
+            </button>
+          </div>
+
+          <div class="editions-modal__features">
+            <ul class="editions-modal__features-list">
+              <li class="editions-modal__feature" data-tier="standard">Базовая игра</li>
+              <li class="editions-modal__feature" data-tier="ultimate">Бонусное побочное задание</li>
+              <li class="editions-modal__feature" data-tier="deluxe">Приложение с официальным артбуком и оригинальным
+                саундтреком</li>
+
+              <li class="editions-modal__feature" data-tier="standard"><span
+                  class="editions-modal__feature-bullet"></span>Пистолет ПТМ «Монолит» (только одиночная кампания)</li>
+              <li class="editions-modal__feature" data-tier="standard"><span
+                  class="editions-modal__feature-bullet"></span>Штурмовая винтовка AR416 «Монолит» (переносится в
+                многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="standard"><span
+                  class="editions-modal__feature-bullet"></span>Пистолет-пулемёт Integral-A, модификация «Риман» (только
+                одиночная кампания)</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Штурмовая винтовка CA «Лавина», модификация «Габион»
+                (только одиночная кампания)</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Снайперская винтовка M701, модификация «Зверолов»
+                (переносится в многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Дробовик M860 «Монолит» (переносится в
+                многопользовательский режим)</li>
+
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Револьвер Rhino, модификация "Model Competitor"
+                (переносится в многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Пистолет-пулемёт Viper «Монолит» (переносится в
+                многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Штурмовая винтовка «Фора-221», модификация «Колыбельная»
+                (переносится в многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Гладкоствольное ружье Д-12, модификация «Маргач Д-12MT»
+                (переносится в многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Комбинезон «СЕВА», модификация «Странник» (переносится в
+                многопользовательский режим)</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Комбинезон ССП-100М НИИЧАЗ (переносится в
+                многопользовательский режим)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidor-easter-egg" id="sidorEasterEgg" aria-hidden="true">
+    <img src="./assets/img/sidor.png" alt="" width="64" height="64" loading="lazy">
+  </div>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

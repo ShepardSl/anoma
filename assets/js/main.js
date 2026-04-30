@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditionsModal();
   initSidorEasterEgg();
   initHeader();
+  initFAQ();
 
   if (!prefersReducedMotion) {
     initCursorDistortion();
@@ -46,7 +47,6 @@ function initVideoModal() {
 
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
 
       content.focus();
     });
@@ -56,7 +56,6 @@ function initVideoModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     iframe.src = '';
-    document.body.style.overflow = '';
 
     if (triggerBtn) {
       triggerBtn.focus();
@@ -90,7 +89,6 @@ function initPreregModal() {
       lastFocusedBtn = btn;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
 
       content.focus();
     });
@@ -99,7 +97,6 @@ function initPreregModal() {
   function closeModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
 
     if (lastFocusedBtn) {
       lastFocusedBtn.focus();
@@ -195,7 +192,6 @@ function initEditionsModal() {
 
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
       content.focus();
     });
   });
@@ -210,7 +206,6 @@ function initEditionsModal() {
   function closeModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
 
     if (lastFocusedCard) {
       lastFocusedCard.focus();
@@ -525,9 +520,11 @@ function initHeader() {
   const mobileMenu = document.getElementById('mobileMenu');
   if (!header || !btnBurger || !mobileMenu) return;
 
+  const isFaqPage = document.body.classList.contains('page-faq');
+
   // Show header on scroll
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    if (isFaqPage || window.scrollY > 50) {
       header.classList.add('header--visible');
     } else {
       header.classList.remove('header--visible');
@@ -535,7 +532,7 @@ function initHeader() {
   }, { passive: true });
 
   // Check initial state
-  if (window.scrollY > 50) {
+  if (isFaqPage || window.scrollY > 50) {
     header.classList.add('header--visible');
   }
 
@@ -547,13 +544,11 @@ function initHeader() {
       header.classList.remove('is-menu-open');
       btnBurger.classList.remove('is-active');
       btnBurger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     } else {
       mobileMenu.classList.add('is-open');
       header.classList.add('is-menu-open');
       btnBurger.classList.add('is-active');
       btnBurger.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
     }
   });
 
@@ -565,7 +560,57 @@ function initHeader() {
       header.classList.remove('is-menu-open');
       btnBurger.classList.remove('is-active');
       btnBurger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+    });
+  });
+}
+
+function initFAQ() {
+  const faqItems = document.querySelectorAll('.faq__item');
+  if (!faqItems.length) return;
+
+  faqItems.forEach(item => {
+    const trigger = item.querySelector('.faq__trigger');
+    const answer = item.querySelector('.faq__answer');
+
+    if (!trigger || !answer) return;
+
+    trigger.addEventListener('click', () => {
+      const isActive = item.classList.contains('is-active');
+
+      // Close all other items (optional, but usually better for UX)
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item && otherItem.classList.contains('is-active')) {
+          const otherTrigger = otherItem.querySelector('.faq__trigger');
+          const otherAnswer = otherItem.querySelector('.faq__answer');
+          otherItem.classList.remove('is-active');
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          otherAnswer.setAttribute('aria-hidden', 'true');
+          otherAnswer.style.height = '0';
+        }
+      });
+
+      // Toggle current item
+      if (isActive) {
+        item.classList.remove('is-active');
+        trigger.setAttribute('aria-expanded', 'false');
+        answer.setAttribute('aria-hidden', 'true');
+        answer.style.height = '0';
+      } else {
+        item.classList.add('is-active');
+        trigger.setAttribute('aria-expanded', 'true');
+        answer.setAttribute('aria-hidden', 'false');
+        answer.style.height = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Handle window resize to update height if open
+  window.addEventListener('resize', () => {
+    faqItems.forEach(item => {
+      if (item.classList.contains('is-active')) {
+        const answer = item.querySelector('.faq__answer');
+        answer.style.height = answer.scrollHeight + 'px';
+      }
     });
   });
 }
