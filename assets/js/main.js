@@ -134,9 +134,9 @@ function initEditionsModal() {
   };
 
   const prices = {
-    'standard': '19 900,00 KZT',
-    'deluxe': '26 500,00 KZT',
-    'ultimate': '35 900,00 KZT'
+    'standard': '350 ₽',
+    'deluxe': '840 ₽',
+    'ultimate': '1090 ₽'
   };
 
   function updateModalState(targetTier) {
@@ -155,10 +155,34 @@ function initEditionsModal() {
     if (priceEl && prices[targetTier]) {
       priceEl.textContent = prices[targetTier];
     }
+    
+    // Update Cashback Text
+    const cashbackEl = modal.querySelector('#editionsCashback');
+    if (cashbackEl) {
+      if (targetTier === 'standard') cashbackEl.textContent = '350 ₽ от стоимости начисляются на донатный счет';
+      if (targetTier === 'deluxe') cashbackEl.textContent = '840 ₽ от стоимости начисляются на донатный счет';
+      if (targetTier === 'ultimate') cashbackEl.textContent = '1090 ₽ от стоимости начисляются на донатный счет';
+    }
+
+    // Update Description
+    const descEl = modal.querySelector('#editionsDesc');
+    if (descEl) {
+      if (targetTier === 'standard') descEl.textContent = 'Стартовое издание раннего доступа для тех, кто хочет поддержать проект и войти в игру с самого начала.';
+      if (targetTier === 'deluxe') descEl.textContent = 'Расширенное издание раннего доступа с дополнительными эксклюзивными наградами для тех, кто хочет получить больше на старте.';
+      if (targetTier === 'ultimate') descEl.textContent = 'Максимальное издание раннего доступа с полным набором эксклюзивных наград, доступом к тестированию обновлений и изданием «Периметр» для друга.';
+    }
 
     // Update disabled state for items and features
     const activeLevel = tierHierarchy[targetTier];
     
+    // Update main image in gallery
+    const mainImgEl = modal.querySelector('.editions-gallery__main img');
+    if (mainImgEl) {
+      if (targetTier === 'standard') mainImgEl.src = './assets/img/edition1.png';
+      if (targetTier === 'deluxe') mainImgEl.src = './assets/img/edition2.png';
+      if (targetTier === 'ultimate') mainImgEl.src = './assets/img/edition3.png';
+    }
+
     galleryItems.forEach(item => {
       const itemTier = item.dataset.tier;
       if (tierHierarchy[itemTier] > activeLevel) {
@@ -193,6 +217,29 @@ function initEditionsModal() {
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       content.focus();
+    });
+  });
+
+  // Cross-highlighting logic
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('mouseenter', () => {
+      item.classList.add('is-highlighted');
+      if (featureItems[index]) featureItems[index].classList.add('is-highlighted');
+    });
+    item.addEventListener('mouseleave', () => {
+      item.classList.remove('is-highlighted');
+      if (featureItems[index]) featureItems[index].classList.remove('is-highlighted');
+    });
+  });
+
+  featureItems.forEach((item, index) => {
+    item.addEventListener('mouseenter', () => {
+      item.classList.add('is-highlighted');
+      if (galleryItems[index]) galleryItems[index].classList.add('is-highlighted');
+    });
+    item.addEventListener('mouseleave', () => {
+      item.classList.remove('is-highlighted');
+      if (galleryItems[index]) galleryItems[index].classList.remove('is-highlighted');
     });
   });
 
