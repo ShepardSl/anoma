@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Оплата успешна — ANOMA</title>
+  <meta name="description" content="Подтверждение успешного пополнения счета в ANOMA.">
+
+  <link rel="icon" href="./assets/img/favicon.ico" sizes="any">
+  <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/payment.css">
+</head>
+
+<body class="page-success">
+
+  <div class="success-container">
+    <div class="success-card">
+      <div class="success-card__icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      
+      <h1 class="success-card__title">ОПЛАТА ПРОШЛА УСПЕШНО</h1>
+      <p class="success-card__desc">Средства будут зачислены на ваш баланс в течение нескольких минут.</p>
+
+      <div class="success-info">
+        <div class="success-info__row">
+          <span class="success-info__label">Статус:</span>
+          <span class="success-info__value text-accent">Выполнено</span>
+        </div>
+        <div class="success-info__row">
+          <span class="success-info__label">ID транзакции:</span>
+          <span class="success-info__value">#AN-7729410</span>
+        </div>
+        <div class="success-info__row">
+          <span class="success-info__label">Сумма:</span>
+          <span class="success-info__value" id="displayAmount">0 ₽</span>
+        </div>
+      </div>
+
+      <div class="success-actions">
+        <a href="account.html" class="success-btn success-btn--primary">ВЕРНУТЬСЯ В КАБИНЕТ</a>
+        <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="success-btn success-btn--secondary">ПОДДЕРЖКА</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/payment.js"></script>
+</body>
+
+</html>

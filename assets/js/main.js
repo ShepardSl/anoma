@@ -7,7 +7,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initVideoModal();
-  initPreregModal();
+  initAuthModal();
+  initResetPasswordPage();
   initEditionsModal();
   initSidorEasterEgg();
   initHeader();
@@ -72,32 +73,30 @@ function initVideoModal() {
   });
 }
 
-function initPreregModal() {
-  const modal = document.getElementById('preregModal');
+function initAuthModal() {
+  const modal = document.getElementById('authModal');
   if (!modal) return;
-  const openBtns = document.querySelectorAll('#btnOpenPrereg, #btnOpenPreregMobile');
-  const content = modal.querySelector('.prereg-modal__content');
-  if (!openBtns.length || !content) return;
 
-  const overlay = modal.querySelector('.prereg-modal__overlay');
-  const closeBtn = modal.querySelector('.prereg-modal__close');
+  const openBtns = document.querySelectorAll('#btnOpenAuth, #btnOpenAuthMobile, #btnOpenAuthEditions');
+  const closeBtn = modal.querySelector('.auth-modal__close');
+  const overlay = modal.querySelector('.auth-modal__overlay');
+  const screens = modal.querySelectorAll('.auth-modal__screen');
+  const links = modal.querySelectorAll('[data-target]');
   let lastFocusedBtn = null;
 
   openBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       lastFocusedBtn = btn;
+      switchScreen('login');
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
-
-      content.focus();
     });
   });
 
   function closeModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-
     if (lastFocusedBtn) {
       lastFocusedBtn.focus();
     }
@@ -110,12 +109,185 @@ function initPreregModal() {
       closeModal();
     }
   });
+
+  function switchScreen(targetScreen) {
+    screens.forEach(screen => {
+      if (screen.dataset.screen === targetScreen) {
+        screen.classList.add('is-active');
+      } else {
+        screen.classList.remove('is-active');
+      }
+    });
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = link.dataset.target;
+      if (target) {
+        switchScreen(target);
+      }
+    });
+  });
+
+  function clearErrors(form) {
+    const groups = form.querySelectorAll('.auth-form__group');
+    groups.forEach(group => group.classList.remove('is-invalid'));
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function showError(input, show) {
+    const group = input.closest('.auth-form__group');
+    if (group) {
+      if (show) group.classList.add('is-invalid');
+      else group.classList.remove('is-invalid');
+    }
+  }
+
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors(loginForm);
+      let isValid = true;
+      const email = loginForm.email;
+      const password = loginForm.password;
+
+      if (!email.value || !validateEmail(email.value)) {
+        showError(email, true);
+        isValid = false;
+      }
+      if (!password.value) {
+        showError(password, true);
+        isValid = false;
+      }
+
+      if (isValid) {
+        console.log('Login submitted', { email: email.value });
+        closeModal();
+      }
+    });
+  }
+
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors(registerForm);
+      let isValid = true;
+      const email = registerForm.email;
+      const nickname = registerForm.nickname;
+      const password = registerForm.password;
+      const terms = registerForm.terms;
+
+      if (!email.value || !validateEmail(email.value)) {
+        showError(email, true);
+        isValid = false;
+      }
+      if (!nickname.value.trim()) {
+        showError(nickname, true);
+        isValid = false;
+      }
+      if (!password.value) {
+        showError(password, true);
+        isValid = false;
+      }
+      if (!terms.checked) {
+        showError(terms, true);
+        isValid = false;
+      }
+
+      if (isValid) {
+        console.log('Register submitted', { email: email.value, nickname: nickname.value });
+        switchScreen('login');
+      }
+    });
+  }
+
+  const forgotForm = document.getElementById('forgotForm');
+  if (forgotForm) {
+    forgotForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors(forgotForm);
+      let isValid = true;
+      const email = forgotForm.email;
+
+      if (!email.value || !validateEmail(email.value)) {
+        showError(email, true);
+        isValid = false;
+      }
+
+      if (isValid) {
+        console.log('Forgot password submitted', { email: email.value });
+        switchScreen('forgotPasswordSuccess');
+      }
+    });
+  }
+
+}
+
+function initResetPasswordPage() {
+  const container = document.getElementById('resetPasswordContainer');
+  if (!container) return;
+
+  const screens = container.querySelectorAll('.auth-modal__screen');
+  const resetForm = document.getElementById('resetForm');
+
+  function switchScreen(targetScreen) {
+    screens.forEach(screen => {
+      if (screen.dataset.screen === targetScreen) {
+        screen.classList.add('is-active');
+      } else {
+        screen.classList.remove('is-active');
+      }
+    });
+  }
+
+  function clearErrors(form) {
+    const groups = form.querySelectorAll('.auth-form__group');
+    groups.forEach(group => group.classList.remove('is-invalid'));
+  }
+
+  function showError(input, show) {
+    const group = input.closest('.auth-form__group');
+    if (group) {
+      if (show) group.classList.add('is-invalid');
+      else group.classList.remove('is-invalid');
+    }
+  }
+
+  if (resetForm) {
+    resetForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors(resetForm);
+      let isValid = true;
+      const newPassword = resetForm.newPassword;
+      const confirmPassword = resetForm.confirmPassword;
+
+      if (!newPassword.value) {
+        showError(newPassword, true);
+        isValid = false;
+      }
+      if (!confirmPassword.value || newPassword.value !== confirmPassword.value) {
+        showError(confirmPassword, true);
+        isValid = false;
+      }
+
+      if (isValid) {
+        console.log('Reset password submitted');
+        switchScreen('resetPasswordSuccess');
+      }
+    });
+  }
 }
 
 function initEditionsModal() {
   const modal = document.getElementById('editionsModal');
   if (!modal) return;
-  const cards = document.querySelectorAll('.editions__card');
+  const cards = document.querySelectorAll('.editions__card, #btnOpenEditionsBanner');
   const content = modal.querySelector('.editions-modal__content');
   if (!cards.length || !content) return;
 
@@ -208,7 +380,8 @@ function initEditionsModal() {
       e.preventDefault();
       lastFocusedCard = card;
       
-      let targetTier = 'standard';
+      let targetTier = card.dataset.openTier || 'ultimate';
+      if (card.classList.contains('editions__card--standard')) targetTier = 'standard';
       if (card.classList.contains('editions__card--deluxe')) targetTier = 'deluxe';
       if (card.classList.contains('editions__card--ultimate')) targetTier = 'ultimate';
 
@@ -269,7 +442,7 @@ function initEditionsModal() {
 }
 
 function initHeroGlitchText() {
-  const btn = document.getElementById('btnOpenPrereg');
+  const btn = document.getElementById('btnOpenAuth');
   if (!btn) return;
 
   const textEl = btn.querySelector('.hero__cta-text');
@@ -392,14 +565,14 @@ function initSmoothScroll() {
 }
 
 function initTileHoverDistortion() {
-  const tiles = document.querySelectorAll('.features__tile, .editions__card');
+  const tiles = document.querySelectorAll('.features__tile, .editions__card, .account-tile');
   const svgDefs = document.querySelector('svg.sr-only defs');
   if (!tiles.length || !svgDefs) return;
 
   const maxScale = 35;
 
   tiles.forEach((tile, index) => {
-    const img = tile.querySelector('.features__tile-img, .editions__card-cover');
+    const img = tile.querySelector('.features__tile-img, .editions__card-cover, .account-tile__bg');
     const filterId = `distort-tile-hover-${index}`;
     const mapId = `displacement-hover-${index}`;
 
