@@ -329,11 +329,11 @@ function initEditionsModal() {
     }
     
     // Update Cashback Text
-    const cashbackEl = modal.querySelector('#editionsCashback');
-    if (cashbackEl) {
-      if (targetTier === 'standard') cashbackEl.textContent = '350 ₽ от стоимости начисляются на донатный счет';
-      if (targetTier === 'deluxe') cashbackEl.textContent = '840 ₽ от стоимости начисляются на донатный счет';
-      if (targetTier === 'ultimate') cashbackEl.textContent = '1090 ₽ от стоимости начисляются на донатный счет';
+    const cashbackTextEl = modal.querySelector('#editionsCashbackText');
+    if (cashbackTextEl) {
+      if (targetTier === 'standard') cashbackTextEl.textContent = '350 ₽ от стоимости начисляются на донатный счет';
+      if (targetTier === 'deluxe') cashbackTextEl.textContent = '840 ₽ от стоимости начисляются на донатный счет';
+      if (targetTier === 'ultimate') cashbackTextEl.textContent = '1090 ₽ от стоимости начисляются на донатный счет';
     }
 
     // Update Description

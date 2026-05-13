@@ -41,7 +41,12 @@
           </div>
         </div>
         <button class="account-logout" title="Выйти">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
           <span class="account-logout__text">Выйти</span>
         </button>
       </div>
@@ -53,15 +58,38 @@
     <aside class="account-sidebar">
       <nav class="account-nav">
         <a href="#" class="account-nav__link is-active">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
           <span>Обзор</span>
         </a>
         <a href="#" class="account-nav__link">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.82-8.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span>Спонсорство</span>
+        </a>
+        <a href="#" class="account-nav__link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+          </svg>
           <span>Настройки</span>
         </a>
         <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="account-nav__link">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
           <span>Поддержка</span>
         </a>
       </nav>
@@ -71,13 +99,15 @@
     <main class="account-main">
       <div class="account-content">
         <h1 class="account-title" id="accountPageTitle">Добро пожаловать в Зону, Skif_77</h1>
-        
+
         <div id="overviewSection">
-          <div class="account-banner">
+          <div class="account-banner" style="margin-bottom: var(--space-3xl);">
             <div class="account-banner__content">
               <h2 class="account-banner__title">ПОДДЕРЖИТЕ РАЗРАБОТКУ</h2>
-              <p class="account-banner__desc">Получите эксклюзивные внутриигровые награды и доступ к ранним тестам, выбрав одно из изданий поддержки.</p>
-              <button class="account-banner__btn" id="btnOpenEditionsBanner" data-open-tier="standard">ПОЛУЧИТЬ ИЗДАНИЕ</button>
+              <p class="account-banner__desc">Получите эксклюзивные внутриигровые награды и доступ к ранним тестам,
+                выбрав одно из изданий поддержки.</p>
+              <button class="account-banner__btn" id="btnOpenEditionsBanner" data-open-tier="standard">ПОЛУЧИТЬ
+                ИЗДАНИЕ</button>
             </div>
             <div class="account-banner__image">
               <img src="./assets/img/screenshot2.png" alt="Editions background">
@@ -103,7 +133,8 @@
           </div>
 
           <div class="account-tiles">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScsadZz_5GCUrAZubNEpT86fGNEL5uBbUMrf_bMq-caXoN56w/viewform" target="_blank" rel="noopener" class="account-tile">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScsadZz_5GCUrAZubNEpT86fGNEL5uBbUMrf_bMq-caXoN56w/viewform"
+              target="_blank" rel="noopener" class="account-tile">
               <img src="./assets/img/image-1.png" alt="" class="account-tile__bg">
               <div class="account-tile__content">
                 <div class="account-tile__title-wrap">
@@ -118,10 +149,10 @@
               <img src="./assets/img/image-2.png" alt="" class="account-tile__bg">
               <div class="account-tile__content">
                 <div class="account-tile__title-wrap">
-                  <h3 class="account-tile__title">Общение с разработчиками</h3>
+                  <h3 class="account-tile__title">Общение с командой</h3>
                   <img src="./assets/img/discord.svg" alt="" class="account-tile__icon">
                 </div>
-                <p class="account-tile__desc">Отвечаем на вопросы в Discord.</p>
+                <p class="account-tile__desc">Отвечаем на вопросы в Discord. Делимся уникальным контентом.</p>
               </div>
             </a>
 
@@ -132,11 +163,59 @@
                   <h3 class="account-tile__title">Новости и обновления</h3>
                   <img src="./assets/img/telegram.svg" alt="" class="account-tile__icon">
                 </div>
-                <p class="account-tile__desc">Следи за прогрессом разработки и актуальными анонсами в нашем Telegram.</p>
+                <p class="account-tile__desc">Следи за прогрессом разработки и актуальными анонсами в нашем Telegram.
+                </p>
               </div>
             </a>
           </div>
         </div>
+
+        <!-- Sponsorship Section -->
+        <div id="sponsorshipSection" style="display: none;">
+          <div class="sponsorship-list" style="display: flex; flex-direction: column; gap: 32px;">
+            
+            <!-- Skin -->
+            <div class="account-banner">
+              <div class="account-banner__content">
+                <h2 class="account-banner__title">УНИКАЛЬНЫЙ СКИН</h2>
+                <p class="account-banner__desc">Получите индивидуальный внешний вид головы персонажа с уникальными чертами, шрамами, маской и другими деталями по вашему образу.</p>
+                <button class="account-banner__btn">ПОЛУЧИТЬ</button>
+              </div>
+              <div class="account-banner__image">
+                <img src="./assets/img/hero-image.png" alt="Unique Skin">
+              </div>
+            </div>
+
+            <!-- Easter Egg -->
+            <div class="account-banner">
+              <div class="account-banner__content">
+                <h2 class="account-banner__title">ПАСХАЛКА В ИГРЕ</h2>
+                <p class="account-banner__desc">Оставьте свой след в мире игры — мы можем реализовать для вас уникальную пасхалку в формате надписи, декали или небольшой визуальной отсылки.</p>
+                <button class="account-banner__btn">ПОЛУЧИТЬ</button>
+              </div>
+              <div class="account-banner__image">
+                <img src="./assets/img/hero-image.png" alt="Easter Egg">
+              </div>
+            </div>
+
+            <!-- NPC -->
+            <div class="account-banner">
+              <div class="account-banner__content">
+                <h2 class="account-banner__title">ИМЕННОЙ NPC</h2>
+                <p class="account-banner__desc">Закажите собственного лорного персонажа, который появится в игре у костра или в мире Зоны под согласованным именем.</p>
+                <button class="account-banner__btn">ПОЛУЧИТЬ</button>
+              </div>
+              <div class="account-banner__image">
+                <img src="./assets/img/hero-image.png" alt="Named NPC">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
         <!-- Settings Section (Hidden by default) -->
         <div class="account-settings" id="settingsSection" style="display: none;">
           <div class="account-grid">
@@ -144,14 +223,15 @@
             <div class="account-card">
               <h3 class="account-card__title">Смена электронной почты</h3>
               <div class="account-card__content">
-                <form class="settings-form" id="emailChangeForm">
+                <form class="settings-form" id="emailChangeForm" novalidate>
                   <div class="settings-form__group">
                     <label class="settings-form__label">Текущая почта</label>
                     <input type="email" class="settings-input" value="skif_77@gmail.com" readonly>
                   </div>
                   <div class="settings-form__group">
                     <label class="settings-form__label">Новая почта</label>
-                    <input type="email" class="settings-input" placeholder="Введите новый адрес" required>
+                    <input type="email" id="newEmail" class="settings-input" placeholder="Введите новый адрес" required>
+                    <div class="error-message" id="newEmailError"></div>
                   </div>
                   <button type="submit" class="account-card__btn-action">ПОДТВЕРДИТЬ</button>
                 </form>
@@ -162,18 +242,21 @@
             <div class="account-card">
               <h3 class="account-card__title">Управление паролем</h3>
               <div class="account-card__content">
-                <form class="settings-form" id="passwordChangeForm">
+                <form class="settings-form" id="passwordChangeForm" novalidate>
                   <div class="settings-form__group">
                     <label class="settings-form__label">Текущий пароль</label>
-                    <input type="password" class="settings-input" placeholder="••••••••" required>
+                    <input type="password" id="currentPassword" class="settings-input" placeholder="••••••••" required>
+                    <div class="error-message" id="currentPasswordError"></div>
                   </div>
                   <div class="settings-form__group">
                     <label class="settings-form__label">Новый пароль</label>
-                    <input type="password" class="settings-input" placeholder="Введите новый пароль" required>
+                    <input type="password" id="newPassword" class="settings-input" placeholder="Введите новый пароль" required minlength="8">
+                    <div class="error-message" id="newPasswordError"></div>
                   </div>
                   <div class="settings-form__group">
                     <label class="settings-form__label">Повторите новый пароль</label>
-                    <input type="password" class="settings-input" placeholder="Повторите новый пароль" required>
+                    <input type="password" id="confirmPassword" class="settings-input" placeholder="Повторите новый пароль" required minlength="8">
+                    <div class="error-message" id="confirmPasswordError"></div>
                   </div>
                   <button type="submit" class="account-card__btn-action">ПОДТВЕРДИТЬ</button>
                 </form>
@@ -191,11 +274,14 @@
     <div class="topup-modal__content">
       <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
       <h2 class="topup-modal__title">КОД БЕЗОПАСНОСТИ</h2>
-      <p class="topup-modal__desc" style="text-align: center; margin-bottom: 20px; font-size: 13px; color: var(--clr-text-muted);">Мы отправили код подтверждения на вашу новую почту. Введите его ниже:</p>
-      
+      <p class="topup-modal__desc"
+        style="text-align: center; margin-bottom: 20px; font-size: 13px; color: var(--clr-text-muted);">Мы отправили код
+        подтверждения на вашу новую почту. Введите его ниже:</p>
+
       <form class="topup-form" id="securityCodeForm">
         <div class="topup-form__group">
-          <input type="text" class="topup-input" placeholder="000000" maxlength="6" style="text-align: center; letter-spacing: 0.5em;">
+          <input type="text" class="topup-input" placeholder="000000" maxlength="6"
+            style="text-align: center; letter-spacing: 0.5em;">
         </div>
         <button type="submit" class="topup-submit-btn">ПОДТВЕРДИТЬ СМЕНУ</button>
       </form>
@@ -203,7 +289,7 @@
   </div>
 
   <!-- Notification Toast -->
-  <div class="notification-container" id="notificationContainer"></div>
+
 
   <footer class="footer" id="footer">
     <div class="container footer__inner">
@@ -242,8 +328,10 @@
 
         <div class="footer__legal">
           <a href="./assets/docs/ANOMA_Услуги.pdf" target="_blank" class="footer__link">Услуги</a>
-          <a href="./assets/docs/ANOMA_Пользовательское%20соглашение.pdf" target="_blank" class="footer__link">Пользовательское соглашение</a>
-          <a href="./assets/docs/ANOMA_Политика%20конфиденциальности.pdf" target="_blank" class="footer__link">Политика конфиденциальности</a>
+          <a href="./assets/docs/ANOMA_Пользовательское%20соглашение.pdf" target="_blank"
+            class="footer__link">Пользовательское соглашение</a>
+          <a href="./assets/docs/ANOMA_Политика%20конфиденциальности.pdf" target="_blank" class="footer__link">Политика
+            конфиденциальности</a>
         </div>
       </div>
 
@@ -272,49 +360,62 @@
             <img src="./assets/img/edition3.png" alt="Edition Cover" class="editions-gallery__img">
           </div>
           <!-- Grid items with real feature images -->
-          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/editions/early-pass.png" alt="Participation in early access">
+          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/editions/early-pass.png"
+              alt="Participation in early access">
             <div class="editions-gallery__bar"></div>
           </div>
-          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/editions/discord-role.png" alt="Exclusive Discord role">
+          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/editions/discord-role.png"
+              alt="Exclusive Discord role">
             <div class="editions-gallery__bar"></div>
           </div>
-          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/editions/donation-balance.png" alt="Donation balance">
-            <div class="editions-gallery__bar"></div>
-          </div>
-
-          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/bladed-weapons.png" alt="Exclusive cold weapon">
-            <div class="editions-gallery__bar"></div>
-          </div>
-          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/bolt.png" alt="Anomaly detection item">
-            <div class="editions-gallery__bar"></div>
-          </div>
-          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/menu-background.png" alt="Main menu background">
-            <div class="editions-gallery__bar"></div>
-          </div>
-          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/death-backpack.png" alt="Special backpack model">
+          <div class="editions-gallery__item" data-tier="standard"><img src="./assets/img/editions/donation-balance.png"
+              alt="Donation balance">
             <div class="editions-gallery__bar"></div>
           </div>
 
-          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/artifact.png" alt="Exclusive collector's artifact">
+          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/bladed-weapons.png"
+              alt="Exclusive cold weapon">
             <div class="editions-gallery__bar"></div>
           </div>
-          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/coordinates-cache.png" alt="Coordinates of hidden cache">
+          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/bolt.png"
+              alt="Anomaly detection item">
             <div class="editions-gallery__bar"></div>
           </div>
-          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/titul-nickname.png" alt="Exclusive title">
+          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/menu-background.png"
+              alt="Main menu background">
             <div class="editions-gallery__bar"></div>
           </div>
-          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/update-testing.png" alt="Access to future update testing">
+          <div class="editions-gallery__item" data-tier="deluxe"><img src="./assets/img/editions/death-backpack.png"
+              alt="Special backpack model">
             <div class="editions-gallery__bar"></div>
           </div>
-          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/gift-edition.png" alt="Gift Perimeter edition for a friend">
+
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/artifact.png"
+              alt="Exclusive collector's artifact">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img
+              src="./assets/img/editions/coordinates-cache.png" alt="Coordinates of hidden cache">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/titul-nickname.png"
+              alt="Exclusive title">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/update-testing.png"
+              alt="Access to future update testing">
+            <div class="editions-gallery__bar"></div>
+          </div>
+          <div class="editions-gallery__item" data-tier="ultimate"><img src="./assets/img/editions/gift-edition.png"
+              alt="Gift Perimeter edition for a friend">
             <div class="editions-gallery__bar"></div>
           </div>
         </div>
 
         <div class="editions-modal__info">
           <p class="editions-modal__desc" id="editionsDesc">
-            Максимальное издание раннего доступа с полным набором эксклюзивных наград, доступом к тестированию обновлений и изданием «Периметр» для друга.
+            Максимальное издание раннего доступа с полным набором эксклюзивных наград, доступом к тестированию
+            обновлений и изданием «Периметр» для друга.
           </p>
 
           <div class="editions-modal__purchase">
@@ -334,22 +435,48 @@
             <ul class="editions-modal__features-list">
               <li class="editions-modal__feature" data-tier="standard">Участие в раннем доступе игры</li>
               <li class="editions-modal__feature" data-tier="standard">Эксклюзивная роль в Discord</li>
-              <li class="editions-modal__feature" data-tier="standard" id="editionsCashback">350 ₽ от стоимости начисляются на донатный счет</li>
+              <li class="editions-modal__feature" data-tier="standard" id="editionsCashback">
+                <span id="editionsCashbackText">350 ₽ от стоимости начисляются на донатный счет</span>
+                <span class="editions-modal__help"
+                  data-tooltip="Полноценная внутриигровая донатная валюта, которую можно будет потратить на доступную монетизацию внутри проекта">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="editions-modal__help-icon">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </span>
+              </li>
 
-              <li class="editions-modal__feature" data-tier="deluxe"><span class="editions-modal__feature-bullet"></span>Эксклюзивное холодное оружие</li>
-              <li class="editions-modal__feature" data-tier="deluxe"><span class="editions-modal__feature-bullet"></span>Особый предмет для проверки аномалий вместо болта</li>
-              <li class="editions-modal__feature" data-tier="deluxe"><span class="editions-modal__feature-bullet"></span>Эксклюзивный фон главного меню</li>
-              <li class="editions-modal__feature" data-tier="deluxe"><span class="editions-modal__feature-bullet"></span>Особая модель рюкзака после смерти персонажа</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Эксклюзивное холодное оружие</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Особый предмет для проверки аномалий вместо болта</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Эксклюзивный фон главного меню</li>
+              <li class="editions-modal__feature" data-tier="deluxe"><span
+                  class="editions-modal__feature-bullet"></span>Особая модель рюкзака после смерти персонажа</li>
 
-              <li class="editions-modal__feature" data-tier="ultimate"><span class="editions-modal__feature-bullet"></span>Эксклюзивный коллекционный артефакт</li>
-              <li class="editions-modal__feature" data-tier="ultimate"><span class="editions-modal__feature-bullet"></span>Координаты закрытого тайника с неизвестным содержимым</li>
-              <li class="editions-modal__feature" data-tier="ultimate"><span class="editions-modal__feature-bullet"></span>Эксклюзивный титул рядом с ником в безопасных зонах</li>
-              <li class="editions-modal__feature" data-tier="ultimate"><span class="editions-modal__feature-bullet"></span>Доступ к тестированию будущих обновлений игры</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Эксклюзивный коллекционный артефакт</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Координаты закрытого тайника с неизвестным содержимым
+              </li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Эксклюзивный титул рядом с ником в безопасных зонах</li>
+              <li class="editions-modal__feature" data-tier="ultimate"><span
+                  class="editions-modal__feature-bullet"></span>Доступ к тестированию будущих обновлений игры</li>
               <li class="editions-modal__feature" data-tier="ultimate">
                 <span class="editions-modal__feature-bullet"></span>
                 Подарочное издание «Периметр» для друга
-                <span class="editions-modal__help" data-tooltip="Подарочное издание «Периметр» для друга не начисляет сумму покупки на донатный счет">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="editions-modal__help-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="editions-modal__help"
+                  data-tooltip="Подарочное издание «Периметр» для друга не начисляет сумму покупки на донатный счет">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="editions-modal__help-icon">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
                 </span>
               </li>
             </ul>
@@ -365,14 +492,17 @@
     <div class="topup-modal__content">
       <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
       <h2 class="topup-modal__title">ПОПОЛНЕНИЕ СЧЕТА</h2>
-      
+
       <form class="topup-form" id="topupForm">
         <div class="topup-form__group">
           <label class="topup-form__label">Способ оплаты</label>
           <div class="topup-dropdown" id="paymentDropdown">
             <div class="topup-dropdown__selected">
               <span>Система быстрых платежей (СБП)</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </div>
             <div class="topup-dropdown__list">
               <div class="topup-dropdown__item is-active" data-value="sbp">Система быстрых платежей (СБП)</div>
@@ -399,6 +529,175 @@
       </form>
     </div>
   </div>
+
+  <!-- Logout Modal -->
+  <div class="topup-modal" id="logoutModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="topup-modal__overlay"></div>
+    <div class="topup-modal__content" style="max-width: 440px; text-align: center; padding: 40px 30px;">
+      <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
+      <h2 class="topup-modal__title" style="margin-bottom: 12px;">ВЫХОД ИЗ АККАУНТА</h2>
+      <p style="font-size: 15px; color: var(--clr-text-muted); margin-bottom: 32px;">
+        Вы уверены, что хотите выйти из своего аккаунта?
+      </p>
+
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button class="account-banner__btn" id="confirmLogout"
+          style="background: #c44b3f; min-width: 140px; padding: 10px 24px;">ВЫЙТИ</button>
+        <button class="account-banner__btn" id="cancelLogout"
+          style="background: transparent; border: 1px solid var(--clr-border); color: #fff; min-width: 140px; padding: 10px 24px;">ОСТАТЬСЯ</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Easter Egg Modal -->
+  <div class="topup-modal" id="easterEggModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="topup-modal__overlay"></div>
+    <div class="topup-modal__content sponsorship-modal">
+      <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
+      
+      <div class="sponsorship-modal__header">
+        <h2 class="topup-modal__title" style="text-align: left; margin-bottom: 8px;">ПАСХАЛКА В ИГРЕ</h2>
+        <p class="sponsorship-modal__intro">
+          Оставьте свой след в мире игры — мы можем реализовать для вас уникальную пасхалку в формате надписи, декали или небольшой визуальной отсылки в мире проекта.
+        </p>
+      </div>
+
+      <div class="sponsorship-modal__body">
+        <div class="sponsorship-modal__grid">
+          <div class="sponsorship-modal__info">
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">КАК ЭТО МОЖЕТ ВЫГЛЯДЕТЬ</h3>
+              <p class="sponsorship-info-text">Надпись на объекте, декаль в окружении, знак, отметка или небольшая визуальная отсылка, аккуратно встроенная в одну из локаций.</p>
+            </div>
+            
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">УСЛОВИЯ РЕАЛИЗАЦИИ</h3>
+              <p class="sponsorship-info-text">Каждая идея проходит согласование с нашей стороны и должна соответствовать правилам проекта, сеттингу и цензуре. При необходимости мы можем предложить правки или отказать в реализации.</p>
+            </div>
+
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">КАК ПРОХОДИТ РЕАЛИЗАЦИЯ</h3>
+              <p class="sponsorship-info-text">Вы отправляете нам идею, мы обсуждаем формат и после согласования вручную интегрируем пасхалку в игру.</p>
+            </div>
+          </div>
+
+          <div class="sponsorship-modal__gallery">
+            <div class="sponsorship-gallery-grid sponsorship-gallery-grid--single">
+              <div class="sponsorship-gallery-item"><img src="./assets/img/screenshot2.png" alt="Example"></div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="sponsorship-modal__footer">
+        <div class="sponsorship-modal__price">До 2000 ₽</div>
+        <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="topup-submit-btn sponsorship-modal__btn" id="btnDiscussEasterEgg" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">ОБСУДИТЬ РЕАЛИЗАЦИЮ</a>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Named NPC Modal -->
+  <div class="topup-modal" id="npcModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="topup-modal__overlay"></div>
+    <div class="topup-modal__content sponsorship-modal">
+      <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
+      
+      <div class="sponsorship-modal__header">
+        <h2 class="topup-modal__title" style="text-align: left; margin-bottom: 8px;">ИМЕННОЙ NPC</h2>
+        <p class="sponsorship-modal__intro">
+          Закажите собственного лорного персонажа, который появится в игре у костра или в мире Зоны под согласованным именем.
+        </p>
+      </div>
+
+      <div class="sponsorship-modal__body">
+        <div class="sponsorship-modal__grid">
+          <div class="sponsorship-modal__info">
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">КАК ЭТО МОЖЕТ ВЫГЛЯДЕТЬ</h3>
+              <p class="sponsorship-info-text">NPC у костра, персонаж в одной из локаций, бродящий сталкер или лорная фигура с персональной отсылкой, аккуратно встроенная в мир игры.</p>
+            </div>
+            
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">УСЛОВИЯ РЕАЛИЗАЦИИ</h3>
+              <p class="sponsorship-info-text">Имя, образ и подача персонажа проходят согласование с нашей стороны и должны соответствовать правилам проекта, сеттингу и цензуре. При необходимости мы можем предложить правки или отказать в реализации.</p>
+            </div>
+
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">КАК ПРОХОДИТ РЕАЛИЗАЦИЯ</h3>
+              <p class="sponsorship-info-text">Вы отправляете нам идею персонажа, мы обсуждаем его формат и после согласования вручную интегрируем NPC в игру.</p>
+            </div>
+          </div>
+
+          <div class="sponsorship-modal__gallery">
+            <div class="sponsorship-gallery-grid sponsorship-gallery-grid--single">
+              <div class="sponsorship-gallery-item"><img src="./assets/img/screenshot1.png" alt="Example"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sponsorship-modal__footer">
+        <div class="sponsorship-modal__price">До 3000 ₽</div>
+        <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="topup-submit-btn sponsorship-modal__btn" id="btnDiscussNPC" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">ОБСУДИТЬ РЕАЛИЗАЦИЮ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unique Skin Modal -->
+  <div class="topup-modal" id="skinModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="topup-modal__overlay"></div>
+    <div class="topup-modal__content sponsorship-modal">
+      <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
+      
+      <div class="sponsorship-modal__header">
+        <h2 class="topup-modal__title" style="text-align: left; margin-bottom: 8px;">УНИКАЛЬНЫЙ СКИН</h2>
+        <p class="sponsorship-modal__intro">
+          Получите индивидуальный внешний вид головы персонажа с уникальными чертами, шрамами, маской и другими деталями по вашему образу.
+        </p>
+      </div>
+
+      <div class="sponsorship-modal__body">
+        <div class="sponsorship-modal__grid">
+          <div class="sponsorship-modal__info">
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">КАК ЭТО МОЖЕТ ВЫГЛЯДЕТЬ</h3>
+              <p class="sponsorship-info-text">Уникальное лицо, отдельные черты внешности, шрамы, татуировки, маска и другие допустимые детали, аккуратно встроенная в стилистику проекта.</p>
+            </div>
+            
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">УСЛОВИЯ РЕАЛИЗАЦИИ</h3>
+              <p class="sponsorship-info-text">Финальный вариант проходит согласование с нашей стороны и должен соответствовать правилам проекта, сеттингу и цензуре. При необходимости мы можем предложить правки или отказать в реализации.</p>
+            </div>
+
+            <div class="sponsorship-info-section">
+              <h3 class="sponsorship-info-title">КАК ПРОХОДИТ РЕАЛИЗАЦИЯ</h3>
+              <p class="sponsorship-info-text">Вы отправляете нам идею и референсы, мы обсуждаем детали и после согласования вручную создаем внешний вид персонажа.</p>
+            </div>
+          </div>
+
+          <div class="sponsorship-modal__gallery">
+            <div class="sponsorship-gallery-grid sponsorship-gallery-grid--single">
+              <div class="sponsorship-gallery-item"><img src="./assets/img/hero-image.png" alt="Example"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sponsorship-modal__footer">
+        <div class="sponsorship-modal__price">До 5000 ₽</div>
+        <a href="https://vk.me/anoma_ufo" target="_blank" rel="noopener" class="topup-submit-btn sponsorship-modal__btn" id="btnDiscussSkin" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">ОБСУДИТЬ РЕАЛИЗАЦИЮ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification-container" id="notificationContainer"></div>
+
+
 
   <script src="./assets/js/main.js"></script>
   <script src="./assets/js/account.js"></script>

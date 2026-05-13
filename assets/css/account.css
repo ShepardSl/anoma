@@ -123,7 +123,8 @@
   background-color: #0b0b0b;
   border-radius: var(--radius-md);
   overflow: hidden;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: 0;
+  /* Убираем фиксированный отступ */
   min-height: 280px;
   display: flex;
   border: 1px solid var(--clr-border);
@@ -173,6 +174,11 @@
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(181, 166, 66, 0.3);
 }
+
+#logoutModal .account-banner__btn:hover {
+  box-shadow: none;
+}
+
 
 .account-banner__image {
   position: absolute;
@@ -247,6 +253,11 @@
   margin-top: var(--space-3xl);
 }
 
+#sponsorshipSection .account-tiles {
+  margin-top: 0;
+}
+
+
 .account-tile {
   position: relative;
   height: 180px;
@@ -260,6 +271,12 @@
   text-decoration: none;
   transition: border-color var(--transition-base);
 }
+
+.account-tile--tall {
+  height: 480px;
+  /* Было 180px, увеличиваем в 2.6 раза для атмосферности, как просили */
+}
+
 
 .account-tile:hover {
   border-color: var(--clr-accent);
@@ -290,7 +307,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
 }
 
 .account-tile__title {
@@ -321,23 +338,57 @@
 @media (max-width: 992px) {
   .account-layout {
     grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding-inline: var(--container-padding);
+    /* Синхронизация с шапкой */
   }
 
   .account-sidebar {
     border-right: none;
     border-bottom: 1px solid var(--clr-border);
     padding-right: 0;
-    padding-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .account-nav {
     flex-direction: row;
+    justify-content: center;
+    /* Центрирование табов */
     overflow-x: auto;
-    padding-bottom: var(--space-xs);
+    padding-bottom: var(--space-sm);
+    gap: var(--space-md);
+    /* Скрываем скроллбар для эстетики */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .account-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .account-nav__link {
     white-space: nowrap;
+    padding: var(--space-xs) 0;
+    font-size: var(--fs-sm);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+  }
+
+  .account-nav__link.is-active {
+    background: none;
+    border-bottom-color: var(--clr-accent);
+  }
+
+  .account-nav__link svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -528,6 +579,17 @@
   position: relative;
 }
 
+/* Hide spin buttons */
+.topup-input::-webkit-outer-spin-button,
+.topup-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.topup-input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .topup-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
@@ -607,13 +669,13 @@
 .settings-form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 20px; /* Увеличено на ~30% для лучшей читаемости */
 }
 
 .settings-form__group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px; /* Увеличено для баланса */
 }
 
 .settings-form__label {
@@ -641,9 +703,25 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.settings-input[readonly] {
-  opacity: 0.5;
-  cursor: not-allowed;
+.settings-input.is-invalid {
+  border-color: #ff4d4d !important;
+  background: rgba(255, 77, 77, 0.05) !important;
+}
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 11px;
+  font-family: 'Roboto Condensed', sans-serif;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  display: none; /* Скрываем полностью, чтобы не занимал место в gap */
+  transition: opacity 0.3s ease;
+}
+
+.error-message.is-visible {
+  display: block;
+  margin-top: 4px;
+  opacity: 1;
 }
 
 /* Notifications (Toasts) */
@@ -651,7 +729,7 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 2000;
+  z-index: 20000;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -668,9 +746,10 @@
   color: #fff;
   font-size: var(--fs-sm);
   min-width: 300px;
+  max-width: 400px;
   box-shadow: var(--shadow-lg);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   transform: translateX(120%);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -681,18 +760,216 @@
   transform: translateX(0);
 }
 
-.notification--success {
-  border-left-color: var(--clr-accent);
+.notification--error {
+  border-left-color: #ff4d4d;
+}
+
+.notification__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification__message {
+  line-height: 1.4;
+  font-weight: var(--fw-bold);
+}
+
+.notification__btn {
+  display: inline-block;
+  background: var(--clr-accent);
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: fit-content;
+}
+
+.notification__btn:hover {
+  background: var(--clr-accent-hover);
+  transform: translateY(-1px);
 }
 
 .notification__close {
   background: none;
   border: none;
   color: var(--clr-text-muted);
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
   margin-left: 15px;
+  line-height: 1;
+  padding: 0;
+  margin-top: -2px;
 }
 
+/* Sponsorship Modals */
+.sponsorship-modal {
+  max-width: 900px !important;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--space-2xl) !important;
+  /* Равномерные отступы */
+}
 
+/* Custom Scrollbar for Sponsorship Modal */
+.sponsorship-modal::-webkit-scrollbar {
+  width: 5px;
+}
 
+.sponsorship-modal::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.sponsorship-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.sponsorship-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-accent);
+}
+
+.sponsorship-modal__header {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.sponsorship-modal__intro {
+  font-size: var(--fs-base);
+  color: var(--clr-text-muted);
+  line-height: 1.5;
+  max-width: 700px;
+}
+
+.sponsorship-modal__grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  /* Немного увеличим колонку для фото */
+  gap: var(--space-2xl);
+  align-items: center;
+  /* Центрируем всё содержимое сетки по вертикали */
+}
+
+.sponsorship-modal__info {
+  /* align-self: center больше не нужен, так как есть align-items у родителя */
+}
+
+.sponsorship-info-section {
+  margin-bottom: var(--space-xl);
+}
+
+.sponsorship-info-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--clr-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.sponsorship-info-text {
+  font-size: var(--fs-sm);
+  color: #fff;
+  line-height: 1.6;
+}
+
+.sponsorship-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.sponsorship-gallery-grid--single {
+  grid-template-columns: 1fr;
+  height: 100%;
+  /* Растягиваем на всю высоту */
+}
+
+.sponsorship-gallery-grid--single .sponsorship-gallery-item {
+  height: 100%;
+}
+
+.sponsorship-gallery-item {
+  height: 100%;
+  min-height: 400px;
+  /* Задаем базовую высоту, чтобы текст центрировался относительно нее */
+  background: #000;
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.sponsorship-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.sponsorship-gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.sponsorship-modal__footer {
+  margin-top: var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--clr-border);
+}
+
+.sponsorship-modal__price {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: var(--fs-lg);
+  color: #fff;
+  /* Белый цвет цены */
+  letter-spacing: 0.02em;
+}
+
+.sponsorship-modal__footer .topup-submit-btn {
+  width: 340px;
+  /* Совпадает с шириной колонки изображения */
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .sponsorship-modal {
+    padding: var(--space-xl) !important;
+  }
+
+  .sponsorship-modal__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .sponsorship-modal__footer {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .sponsorship-modal__footer .topup-submit-btn {
+    max-width: 100%;
+    order: 2;
+    /* Кнопка внизу */
+  }
+
+  .sponsorship-modal__price {
+    order: 1;
+    /* Цена вверху */
+  }
+}

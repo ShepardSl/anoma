@@ -7,7 +7,52 @@ document.addEventListener('DOMContentLoaded', () => {
   initTopupDropdown();
   initTopupForm();
   initSettingsForms();
+  initPurchaseInterception();
 });
+
+/**
+ * Перехват клика по кнопке покупки в модалке изданий
+ */
+function initPurchaseInterception() {
+  const buyBtn = document.getElementById('btnOpenAuthEditions');
+  if (!buyBtn) return;
+
+  buyBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Закрываем модалку изданий (опционально, но лучше показать тост поверх или после закрытия)
+    // В данном случае покажем тост сразу
+    
+    showNotification(
+      'Недостаточно баланса на счету.', 
+      'error',
+      '<button class="notification__btn" id="btnTopupFromToast">Пополнить баланс</button>'
+    );
+
+    // Вешаем обработчик на кнопку в тосте (так как тост создается динамически)
+    // Используем делегирование или ждем появления в DOM
+  });
+
+  // Делегирование события для кнопки в уведомлении
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'btnTopupFromToast') {
+      const topupModal = document.getElementById('topupModal');
+      if (topupModal) {
+        // Закрываем модалку изданий, если она открыта
+        const editionsModal = document.getElementById('editionsModal');
+        if (editionsModal) editionsModal.classList.remove('is-open');
+
+        // Открываем модалку пополнения
+        topupModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        
+        // Удаляем уведомление
+        const notification = e.target.closest('.notification');
+        if (notification) hideNotification(notification);
+      }
+    }
+  });
+}
 
 /**
  * Инициализация форм в разделе настроек
@@ -18,11 +63,55 @@ function initSettingsForms() {
   const securityModal = document.getElementById('securityCodeModal');
   const securityForm = document.getElementById('securityCodeForm');
 
+  const showInputError = (inputId, errorId, message) => {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    if (input && errorEl) {
+      input.classList.add('is-invalid');
+      errorEl.textContent = message;
+      errorEl.classList.add('is-visible');
+    }
+  };
+
+  const hideInputError = (inputId, errorId) => {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    if (input && errorEl) {
+      input.classList.remove('is-invalid');
+      errorEl.classList.remove('is-visible');
+    }
+  };
+
+  // Очистка ошибок при вводе
+  const inputs = document.querySelectorAll('.settings-input');
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const errorEl = input.nextElementSibling;
+      if (errorEl && errorEl.classList.contains('error-message')) {
+        input.classList.remove('is-invalid');
+        errorEl.classList.remove('is-visible');
+      }
+    });
+  });
+
   // Смена почты
   emailForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    securityModal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    const newEmail = document.getElementById('newEmail');
+    let isValid = true;
+
+    if (!newEmail.value.trim()) {
+      showInputError('newEmail', 'newEmailError', 'Введите адрес почты');
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail.value)) {
+      showInputError('newEmail', 'newEmailError', 'Некорректный формат почты');
+      isValid = false;
+    }
+
+    if (isValid) {
+      securityModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
   });
 
   // Подтверждение кодом
@@ -31,13 +120,39 @@ function initSettingsForms() {
     securityModal.classList.remove('is-open');
     document.body.style.overflow = '';
     showNotification('Электронная почта успешно изменена!');
+    emailForm.reset();
   });
 
   // Смена пароля
   passwordForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    showNotification('Пароль успешно обновлен!');
-    passwordForm.reset();
+    const currentPass = document.getElementById('currentPassword');
+    const newPass = document.getElementById('newPassword');
+    const confirmPass = document.getElementById('confirmPassword');
+    let isValid = true;
+
+    if (!currentPass.value) {
+      showInputError('currentPassword', 'currentPasswordError', 'Введите текущий пароль');
+      isValid = false;
+    }
+
+    if (newPass.value.length < 8) {
+      showInputError('newPassword', 'newPasswordError', 'Минимум 8 символов');
+      isValid = false;
+    }
+
+    if (newPass.value !== confirmPass.value) {
+      showInputError('confirmPassword', 'confirmPasswordError', 'Пароли не совпадают');
+      isValid = false;
+    } else if (!confirmPass.value) {
+      showInputError('confirmPassword', 'confirmPasswordError', 'Повторите пароль');
+      isValid = false;
+    }
+
+    if (isValid) {
+      showNotification('Пароль успешно обновлен!');
+      passwordForm.reset();
+    }
   });
 
   // Закрытие модалки кода
@@ -50,15 +165,18 @@ function initSettingsForms() {
 /**
  * Показ уведомления (Toast)
  */
-function showNotification(message, type = 'success') {
+function showNotification(message, type = 'success', actionHtml = '') {
   const container = document.getElementById('notificationContainer');
   if (!container) return;
 
   const notification = document.createElement('div');
   notification.className = `notification notification--${type}`;
   notification.innerHTML = `
-    <span>${message}</span>
-    <button class="notification__close">&times;</button>
+    <div class="notification__content">
+      <span class="notification__message">${message}</span>
+      ${actionHtml ? `<div class="notification__action">${actionHtml}</div>` : ''}
+    </div>
+    <button class="notification__close" aria-label="Закрыть">&times;</button>
   `;
 
   container.appendChild(notification);
@@ -66,10 +184,11 @@ function showNotification(message, type = 'success') {
   // Показ
   setTimeout(() => notification.classList.add('is-visible'), 100);
 
-  // Авто-скрытие через 4 секунды
+  // Авто-скрытие через 6 секунд (для ошибок с кнопкой даем больше времени)
+  const duration = type === 'error' ? 8000 : 4000;
   const timer = setTimeout(() => {
     hideNotification(notification);
-  }, 4000);
+  }, duration);
 
   // Закрытие по кнопке
   notification.querySelector('.notification__close').addEventListener('click', () => {
@@ -207,12 +326,19 @@ function initAccountNavigation() {
 
       const sectionName = link.querySelector('span').textContent;
       
+      // Скрываем все секции
+      overview.style.display = 'none';
+      settings.style.display = 'none';
+      const sponsorship = document.getElementById('sponsorshipSection');
+      if (sponsorship) sponsorship.style.display = 'none';
+      
       if (sectionName === 'Обзор') {
         overview.style.display = 'block';
-        settings.style.display = 'none';
         pageTitle.textContent = 'Добро пожаловать в Зону, Skif_77';
+      } else if (sectionName === 'Спонсорство') {
+        if (sponsorship) sponsorship.style.display = 'block';
+        pageTitle.textContent = 'Спонсорство проекта';
       } else if (sectionName === 'Настройки') {
-        overview.style.display = 'none';
         settings.style.display = 'block';
         pageTitle.textContent = 'Настройки аккаунта';
       }
@@ -226,12 +352,29 @@ function initAccountNavigation() {
 function initAccountTriggers() {
   // Кнопка выхода
   const logoutBtn = document.querySelector('.account-logout');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      if (confirm('Вы уверены, что хотите выйти?')) {
-        window.location.href = 'index.html';
-      }
+  const logoutModal = document.getElementById('logoutModal');
+  const confirmLogout = document.getElementById('confirmLogout');
+  const cancelLogout = document.getElementById('cancelLogout');
+
+  if (logoutBtn && logoutModal) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoutModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
     });
+
+    confirmLogout?.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    const closeLogout = () => {
+      logoutModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+
+    cancelLogout?.addEventListener('click', closeLogout);
+    logoutModal.querySelector('.topup-modal__close')?.addEventListener('click', closeLogout);
+    logoutModal.querySelector('.topup-modal__overlay')?.addEventListener('click', closeLogout);
   }
 
   // Взаимодействие с кнопкой баннера (если нужно что-то помимо открытия модалки)
@@ -239,6 +382,60 @@ function initAccountTriggers() {
   if (bannerBtn) {
     bannerBtn.addEventListener('click', () => {
       console.log('Пользователь нажал кнопку в баннере личного кабинета');
+    });
+  }
+
+  // Sponsorship Modals
+  const easterEggModal = document.getElementById('easterEggModal');
+  const sponsorshipSection = document.getElementById('sponsorshipSection');
+  
+  if (sponsorshipSection && easterEggModal) {
+    const banners = sponsorshipSection.querySelectorAll('.account-banner');
+    
+    // Уникальный скин (первый баннер)
+    const skinModal = document.getElementById('skinModal');
+    const btnSkin = banners[0]?.querySelector('.account-banner__btn');
+    if (btnSkin && skinModal) {
+      btnSkin.addEventListener('click', (e) => {
+        e.preventDefault();
+        skinModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Пасхалка (второй баннер)
+    const btnEasterEgg = banners[1]?.querySelector('.account-banner__btn');
+    if (btnEasterEgg) {
+      btnEasterEgg.addEventListener('click', (e) => {
+        e.preventDefault();
+        easterEggModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Именной NPC (третий баннер)
+    const npcModal = document.getElementById('npcModal');
+    const btnNPC = banners[2]?.querySelector('.account-banner__btn');
+    if (btnNPC && npcModal) {
+      btnNPC.addEventListener('click', (e) => {
+        e.preventDefault();
+        npcModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Закрытие модалок спонсорства
+    const closeBtns = document.querySelectorAll('.topup-modal__close, .topup-modal__overlay');
+    closeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modal = btn.closest('.topup-modal');
+        if (modal) {
+          modal.classList.remove('is-open');
+          if (!document.querySelector('.topup-modal.is-open')) {
+            document.body.style.overflow = '';
+          }
+        }
+      });
     });
   }
 }
