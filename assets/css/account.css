@@ -583,11 +583,13 @@
 .topup-input::-webkit-outer-spin-button,
 .topup-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
-.topup-input[type=number] {
+.topup-input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .topup-input {
@@ -669,13 +671,13 @@
 .settings-form {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Увеличено на ~30% для лучшей читаемости */
+  gap: 20px;
 }
 
 .settings-form__group {
   display: flex;
   flex-direction: column;
-  gap: 6px; /* Увеличено для баланса */
+  gap: 6px;
 }
 
 .settings-form__label {
@@ -853,14 +855,8 @@
 .sponsorship-modal__grid {
   display: grid;
   grid-template-columns: 1fr 340px;
-  /* Немного увеличим колонку для фото */
   gap: var(--space-2xl);
   align-items: center;
-  /* Центрируем всё содержимое сетки по вертикали */
-}
-
-.sponsorship-modal__info {
-  /* align-self: center больше не нужен, так как есть align-items у родителя */
 }
 
 .sponsorship-info-section {
