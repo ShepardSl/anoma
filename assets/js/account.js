@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTopupDropdown();
   initTopupForm();
   initSettingsForms();
+  initGiftModal();
   initPurchaseInterception();
 });
 
@@ -18,19 +19,27 @@ function initPurchaseInterception() {
   if (!buyBtn) return;
 
   buyBtn.addEventListener('click', (e) => {
+    const editionsModal = document.getElementById('editionsModal');
+    if (!editionsModal) return;
+
+    // Проверяем, выбрано ли издание «Саркофаг»
+    const activeTab = editionsModal.querySelector('.editions-modal__tab--active');
+    if (activeTab && activeTab.dataset.target === 'ultimate') {
+      e.preventDefault();
+      e.stopImmediatePropagation(); // Чтобы не срабатывал стандартный тост ниже
+      
+      editionsModal.classList.remove('is-open');
+      initGiftModalLogic(); // Сбрасываем и открываем модалку подарка
+      return;
+    }
+
     e.preventDefault();
-    
-    // Закрываем модалку изданий (опционально, но лучше показать тост поверх или после закрытия)
-    // В данном случае покажем тост сразу
     
     showNotification(
       'Недостаточно баланса на счету.', 
       'error',
       '<button class="notification__btn" id="btnTopupFromToast">Пополнить баланс</button>'
     );
-
-    // Вешаем обработчик на кнопку в тосте (так как тост создается динамически)
-    // Используем делегирование или ждем появления в DOM
   });
 
   // Делегирование события для кнопки в уведомлении
@@ -38,9 +47,11 @@ function initPurchaseInterception() {
     if (e.target && e.target.id === 'btnTopupFromToast') {
       const topupModal = document.getElementById('topupModal');
       if (topupModal) {
-        // Закрываем модалку изданий, если она открыта
+        // Закрываем модалку изданий и подарка, если они открыты
         const editionsModal = document.getElementById('editionsModal');
+        const giftModal = document.getElementById('giftModal');
         if (editionsModal) editionsModal.classList.remove('is-open');
+        if (giftModal) giftModal.classList.remove('is-open');
 
         // Открываем модалку пополнения
         topupModal.classList.add('is-open');
@@ -439,3 +450,92 @@ function initAccountTriggers() {
     });
   }
 }
+
+/**
+ * Логика модального окна подарка (Саркофаг)
+ */
+function initGiftModal() {
+  const modal = document.getElementById('giftModal');
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector('.topup-modal__close');
+  const overlay = modal.querySelector('.topup-modal__overlay');
+  const options = modal.querySelectorAll('input[name="giftOption"]');
+  const nickInput = document.getElementById('giftFriendNickname');
+  const confirmBtn = document.getElementById('btnConfirmGiftPurchase');
+
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  closeBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', closeModal);
+
+  options.forEach(opt => opt.addEventListener('change', updateGiftUI));
+  nickInput?.addEventListener('input', updateGiftUI);
+
+  confirmBtn?.addEventListener('click', () => {
+    showNotification(
+      'Недостаточно баланса на счету.', 
+      'error',
+      '<button class="notification__btn" id="btnTopupFromToast">Пополнить баланс</button>'
+    );
+  });
+}
+
+/**
+ * Функция сброса и открытия модалки (вызывается из перехватчика)
+ */
+function initGiftModalLogic() {
+  const modal = document.getElementById('giftModal');
+  if (!modal) return;
+
+  const options = modal.querySelectorAll('input[name="giftOption"]');
+  const nickBlock = document.getElementById('giftNicknameBlock');
+  const nickInput = document.getElementById('giftFriendNickname');
+  const summary = document.getElementById('giftSummaryDetails');
+  const confirmBtn = document.getElementById('btnConfirmGiftPurchase');
+
+  // Сброс состояния
+  options.forEach(opt => opt.checked = false);
+  if (nickBlock) nickBlock.style.display = 'none';
+  if (nickInput) nickInput.value = '';
+  if (summary) summary.innerHTML = '<p class="gift-summary__placeholder">Выберите один из вариантов</p>';
+  if (confirmBtn) confirmBtn.disabled = true;
+
+  modal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Обновление интерфейса модалки подарка при выборе опций
+ */
+function updateGiftUI() {
+  const modal = document.getElementById('giftModal');
+  const selected = modal?.querySelector('input[name="giftOption"]:checked')?.value;
+  const nickBlock = document.getElementById('giftNicknameBlock');
+  const nickInput = document.getElementById('giftFriendNickname');
+  const summary = document.getElementById('giftSummaryDetails');
+  const confirmBtn = document.getElementById('btnConfirmGiftPurchase');
+
+  if (!selected || !summary || !confirmBtn) return;
+
+  if (selected === 'no') {
+    if (nickBlock) nickBlock.style.display = 'none';
+    summary.innerHTML = `
+      <div class="gift-summary__item"><span>Саркофаг</span><span>1090 ₽</span></div>
+      <div class="gift-summary__total"><span>Итого</span><span>1090 ₽</span></div>
+    `;
+    confirmBtn.disabled = false;
+  } else if (selected === 'yes') {
+    if (nickBlock) nickBlock.style.display = 'block';
+    summary.innerHTML = `
+      <div class="gift-summary__item"><span>Саркофаг</span><span>1090 ₽</span></div>
+      <div class="gift-summary__item"><span>Периметр для друга</span><span>210 ₽</span></div>
+      <div class="gift-summary__total"><span>Итого</span><span>1300 ₽</span></div>
+    `;
+    confirmBtn.disabled = !nickInput?.value.trim();
+  }
+}
+

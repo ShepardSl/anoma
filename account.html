@@ -724,6 +724,56 @@
     </div>
   </div>
 
+  <div class="topup-modal" id="giftModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="topup-modal__overlay"></div>
+    <div class="topup-modal__content gift-modal-content">
+      <button class="topup-modal__close" aria-label="Закрыть">&times;</button>
+      
+      <div class="gift-modal__grid">
+        <!-- Left Column: Content -->
+        <div class="gift-modal__main">
+          <h2 class="topup-modal__title gift-modal__title">Добавить «Периметр» для друга?</h2>
+          <p class="topup-modal__desc">
+            При покупке издания «Саркофаг» вы можете добавить подарочное издание «Периметр» для друга. В этом случае оно
+            обойдется на 40% дешевле, чем при отдельной покупке.
+          </p>
+
+          <div class="gift-selection">
+            <div class="gift-options">
+              <label class="gift-option">
+                <input type="radio" name="giftOption" value="yes" class="gift-option__input">
+                <span class="gift-option__custom"></span>
+                <span class="gift-option__label">Да, добавить</span>
+              </label>
+              <label class="gift-option">
+                <input type="radio" name="giftOption" value="no" class="gift-option__input">
+                <span class="gift-option__custom"></span>
+                <span class="gift-option__label">Нет, продолжить без подарка</span>
+              </label>
+            </div>
+
+            <div class="gift-nickname-block" id="giftNicknameBlock" style="display: none;">
+              <input type="text" class="topup-input" id="giftFriendNickname" placeholder="Введите никнейм друга">
+              <p class="gift-nickname-hint">На этот аккаунт будет отправлено подарочное издание «Периметр».</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Summary -->
+        <div class="gift-modal__side">
+          <div class="gift-summary">
+            <div class="gift-summary__title">Итоговая сумма</div>
+            <div class="gift-summary__details" id="giftSummaryDetails">
+              <p class="gift-summary__placeholder">Выберите один из вариантов</p>
+            </div>
+          </div>
+
+          <button class="topup-submit-btn" id="btnConfirmGiftPurchase" disabled>Приобрести</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="notification-container" id="notificationContainer"></div>
 
 
