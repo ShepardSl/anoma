@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /account.html
+Disallow: /payment-success.html
+Disallow: /reset-password.html
 
 Sitemap: https://anoma.su/sitemap.xml
